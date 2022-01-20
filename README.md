@@ -4,6 +4,8 @@ Show all variants on product detail page with a buy form
 
 ![](https://i.imgur.com/VPOkXX1.png)
 
+https://user-images.githubusercontent.com/26538915/150406496-27830aa0-9b09-4d68-b6f6-e3611c1270b3.mov
+
 ## Requirements
 
 | Version 	| Requirements               	|
