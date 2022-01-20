@@ -1,0 +1,11 @@
+{
+    "melvVariantsDetail": {
+        "checkout": {
+            "addToCartEmpty": "U heeft geen hoeveelheden geselecteerd"
+        },
+        "detail":{
+            "tabsVariants": "Varianten",
+            "variantTitle": "Product varianten"
+        }
+    }
+}

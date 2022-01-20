@@ -1,0 +1,52 @@
+{% block variant_product_quantity_include %}
+    <div class="col-12 col-sm-4 col-md-2 offset-md-1 variant-item-quantity">
+        <div class="row no-gutters variant-item-quantity-row w-100">
+
+            {% block variant_product_quantity_label %}
+                <div class="col-8 col-sm-12 variant-item-quantity-label">
+                    {{ "checkout.cartHeaderQuantity"|trans|sw_sanitize }}
+                </div>
+            {% endblock %}
+
+            {% block variant_product_quantity_select %}
+                <div class="col-4 col-sm-12">
+                    {% block variant_product_quantity_form %}
+                        {# @deprecated tag:v6.5.0 - 'isChild' will be removed with no replacement #}
+                        <select name="lineItems[{{ variant.id }}][quantity]"
+                                class="custom-select">
+                            {% for quantity in range(0, variant.calculatedMaxPurchase, variant.purchaseSteps) %}
+                                <option value="{{ quantity }}">
+                                    {{ quantity }}
+                                    {% if quantity == 1 %}
+                                        {% if variant.translated.packUnit %} {{ variant.translated.packUnit }}{% endif %}
+                                    {% else %}
+                                        {% if variant.translated.packUnitPlural %}
+                                            {{ variant.translated.packUnitPlural }}
+                                        {% elseif product.translated.packUnit %}
+                                            {{ variant.translated.packUnit }}
+                                        {% endif %}
+                                    {% endif %}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <input type="hidden"
+                               name="lineItems[{{ variant.id }}][id]"
+                               value="{{ variant.id }}">
+                        <input type="hidden"
+                               name="lineItems[{{ variant.id }}][referencedId]"
+                               value="{{ variant.id }}">
+                        <input type="hidden"
+                               name="lineItems[{{ variant.id }}][type]"
+                               value="product">
+                        <input type="hidden"
+                               name="lineItems[{{ variant.id }}][stackable]"
+                               value="1">
+                        <input type="hidden"
+                               name="lineItems[{{ variant.id }}][removable]"
+                               value="1">
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

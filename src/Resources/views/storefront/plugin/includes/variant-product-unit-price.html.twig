@@ -1,0 +1,15 @@
+{% block variant_product_unit_price_include %}
+    <div class="col-12 col-sm-4 col-md-2 variant-item-unit-price">
+        {% block variant_product_unit_price_wrapper %}
+            {% block variant_product_unit_price_label %}
+                <div class="variant-item-unit-price-label">
+                    {{ "checkout.cartHeaderUnitPrice"|trans|sw_sanitize }}
+                </div>
+            {% endblock %}
+
+            {% block variant_product_unit_price_inner %}
+                {{ variant.calculatedPrice.unitPrice|currency }}{% block variant_product_unit_price_tax_symbol %}{{ "general.star"|trans|sw_sanitize }}{% endblock %}
+            {% endblock %}
+        {% endblock %}
+    </div>
+{% endblock %}

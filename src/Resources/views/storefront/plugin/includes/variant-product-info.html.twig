@@ -1,0 +1,92 @@
+{% block variant_product_info_include %}
+    <div class="col-10 col-md-5 cart-item-info">
+        {% block variant_product_info_inner %}
+            <div class="row variant-item-row">
+                {% block variant_product_info_image %}
+                    <div class="col-auto variant-item-info-img">
+                        {% block variant_product_info_image_container %}
+                            <div class="variant-item-img-container">
+                                {% block variant_product_info_image_link %}
+                                    <a href="{{ seoUrl('frontend.detail.page', {'productId': variant.id}) }}"
+                                       class="variant-item-img-link"
+                                       title="{{ variant.translated.name }}"
+                                       data-toggle="modal"
+                                       data-modal-class="quickview-modal"
+                                       data-url="{{ path('widgets.quickview.minimal', { 'productId': variant.id }) }}"
+                                    >
+                                        {% block variant_product_info_image_element %}
+                                            {% if variant.cover.media.url %}
+                                                {% sw_thumbnails 'variant-item-img-thumbnails' with {
+                                                    media: variant.cover.media,
+                                                    sizes: {
+                                                        'default': '100px'
+                                                    },
+                                                    attributes: {
+                                                        'class': 'img-fluid variant-item-img',
+                                                        'alt': (variant.cover.media.translated.alt ?: ''),
+                                                        'title': (variant.cover.media.translated.title ?: '')
+                                                    }
+                                                } %}
+                                            {% else %}
+                                                {% sw_icon 'placeholder' style {
+                                                    'size': 'fluid'
+                                                } %}
+                                            {% endif %}
+                                        {% endblock %}
+                                    </a>
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+
+                {% block variant_product_info_details %}
+                    <div class="col-12 col-sm-7 col-md-8 variant-item-details">
+                        {% block variant_product_info_details_inner %}
+                            <div class="variant-item-details-container">
+                                {% block variant_product_info_label %}
+                                    <a href="{{ seoUrl('frontend.detail.page', {'productId': variant.id}) }}"
+                                       class="variant-item-label"
+                                       title="{{ variant.translated.name }}"
+                                       data-toggle="modal"
+                                       data-modal-class="quickview-modal"
+                                       data-url="{{ path('widgets.quickview.minimal',{ 'productId': variant.id }) }}"
+                                    >
+                                        {{ variant.translated.name }}
+                                    </a>
+                                {% endblock %}
+                                {% block variant_product_info_variant_characteristics %}
+                                    <div class="variant-item-details-characteristics">
+                                        {% for variation in variant.variation %}
+                                            {{ variation.group }}:
+                                            <span class="variant-item-details-characteristics-option">{{ variation.option }}</span>
+                                            {% if not loop.last %}
+                                                {{ " | " }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endblock %}
+
+                                {% block variant_product_info_ordernumber %}
+                                    <div class="variant-item-ordernumber">
+                                        {{ "checkout.cartItemInfoId"|trans|sw_sanitize }} {{ variant.productNumber }}
+                                    </div>
+                                {% endblock %}
+
+                                {% block variant_product_wishlist %}
+                                    {% if config('core.cart.wishlistEnabled') %}
+                                        {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
+                                            showText: true,
+                                            size: 'sm',
+                                            productId: variant.id
+                                        } %}
+                                    {% endif %}
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{
+    "name": "melvinachterhuis/variants-detail-shopware6-plugin",
+    "description": "Show all variants on product detail page",
+    "version": "1.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Melvin Achterhuis"
+        }
+    ],
+    "type": "shopware-platform-plugin",
+    "autoload": {
+        "psr-4": {
+            "Melv\\VariantsDetail\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Melv\\VariantsDetail\\MelvVariantsDetail",
+        "label": {
+            "de-DE": "Alle Varianten auf der Detailseite",
+            "en-GB": "All variants on detail page"
+        },
+        "description": {
+            "de-DE": "Alle Varianten auf der Produktdetailseite anzeigen",
+            "en-GB": "Show all variants on product detail page"
+        }
+    }
+}

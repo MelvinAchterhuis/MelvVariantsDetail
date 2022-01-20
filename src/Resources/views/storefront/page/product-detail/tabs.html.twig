@@ -1,0 +1,38 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/tabs.html.twig' %}
+
+{% block page_product_detail_tabs_navigation_review %}
+    {% block page_product_detail_tabs_navigation_variants %}
+        {% if page.extensions.MelvVariantsDetail|length > 1 %}
+            <li class="nav-item">
+                <a class="nav-link {% if (ratingSuccess == 1) or (ratingSuccess == -1) %}active{% endif %} product-detail-tab-navigation-link"
+                   id="variant-tab"
+                   data-toggle="tab"
+                   data-offcanvas-tabs="true"
+                   href="#variant-tab-pane"
+                   role="tab"
+                   aria-controls="variant-tab-pane"
+                   aria-selected="true">
+                    {{ "melvVariantsDetail.detail.tabsVariants"|trans|sw_sanitize }}
+                    <span class="product-detail-tab-navigation-icon">
+                        {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+                    </span>
+                </a>
+            </li>
+        {% endif %}
+    {% endblock %}
+    {{ parent() }}
+{% endblock %}
+
+{% block page_product_detail_tabs_content_review %}
+    {% block page_product_detail_tabs_content_variants %}
+        {% if page.extensions.MelvVariantsDetail|length > 1 %}
+            <div class="tab-pane fade show {% if (ratingSuccess == 1) or (ratingSuccess == -1) %}active{% endif %}"
+                 id="variant-tab-pane"
+                 role="tabpanel"
+                 aria-labelledby="variant-tab">
+                {% sw_include '@MelvVariantsDetail/storefront/plugin/variants.html.twig' with {'variants': page.extensions.MelvVariantsDetail } %}
+            </div>
+        {% endif %}
+    {% endblock %}
+    {{ parent() }}
+{% endblock %}

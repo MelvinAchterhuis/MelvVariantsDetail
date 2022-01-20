@@ -1,0 +1,50 @@
+{% sw_extends '@Storefront/storefront/utilities/offcanvas.html.twig' %}
+
+{% block utilities_offcanvas_content %}
+    {% block page_product_detail_variant_container %}
+        <div class="product-detail-variant tab-pane-container">
+            {% block page_product_detail_variant_title %}
+                <div class="h3 product-detail-variant-title">
+                    {{ "melvVariantsDetail.detail.variantTitle"|trans|sw_sanitize }} "{{ page.product.translated.name }}"
+                </div>
+            {% endblock %}
+
+            {% block page_product_detail_variant_content %}
+                {% set action %}{{ path('frontend.checkout.variants.add') }}{% endset %}
+                <form action="{{ action }}"
+                      id="variantDetailForm-{{ page.product.id }}"
+                      method="post"
+                      class="variant-detail-form"
+                      data-add-to-cart="true">
+
+                    {{ sw_csrf('frontend.checkout.variants.add') }}
+                    <input type="hidden" name="redirectTo" value="frontend.cart.offcanvas"/>
+
+                    {% for variant in variants %}
+                        <div class="variant-item">
+                            <div class="row variant-item-row">
+                                {% block variant_product_info %}
+                                    {% sw_include '@MelvVariantsDetail/storefront/plugin/includes/variant-product-info.html.twig' %}
+                                {% endblock %}
+                                {% block variant_product_placeholder %}
+                                    {% sw_include '@MelvVariantsDetail/storefront/plugin/includes/variant-product-placeholder.html.twig' %}
+                                {% endblock %}
+                                {% block variant_product_unit_price %}
+                                    {% sw_include '@MelvVariantsDetail/storefront/plugin/includes/variant-product-unit-price.html.twig' %}
+                                {% endblock %}
+                                {% block variant_product_quantity %}
+                                    {% sw_include '@MelvVariantsDetail/storefront/plugin/includes/variant-product-quantity.html.twig' %}
+                                {% endblock %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {% block variant_product_buy %}
+                        {% sw_include '@MelvVariantsDetail/storefront/plugin/includes/variant-product-buy.html.twig' %}
+                    {% endblock %}
+                </form>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}
+
